@@ -17,7 +17,7 @@ This project dives into Netflix’s movie and TV show catalog using SQL to uncov
 
 The data for this project is sourced from the Kaggle dataset:
 
-- **Dataset Link:** [Movies Dataset](https://www.kaggle.com/datasets/shivamb/netflix-shows?resource=download)
+[Dataset Link](https://www.kaggle.com/datasets/shivamb/netflix-shows?resource=download)
 
 ## Schema
 
