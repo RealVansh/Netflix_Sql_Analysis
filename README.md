@@ -45,11 +45,9 @@ CREATE TABLE netflix
 ### 1. Count the Number of Movies vs TV Shows
 
 ```sql
-SELECT 
-    type,
-    COUNT(*)
+SELECT type, COUNT(*)
 FROM netflix
-GROUP BY 1;
+GROUP BY 1
 ```
 
 **Objective:** Determine the distribution of content types on Netflix.
@@ -153,8 +151,7 @@ WHERE director_name = 'Rajiv Chilaka';
 ```sql
 SELECT *
 FROM netflix
-WHERE type = 'TV Show'
-  AND SPLIT_PART(duration, ' ', 1)::INT > 5;
+WHERE TYPE = 'TV Show' AND SPLIT_PART(duration, ' ', 1)::INT > 5
 ```
 
 **Objective:** Identify TV shows with more than 5 seasons.
@@ -175,19 +172,16 @@ GROUP BY 1;
 return top 5 year with highest avg content release!
 
 ```sql
+select * from(
 SELECT 
-    country,
-    release_year,
-    COUNT(show_id) AS total_release,
-    ROUND(
-        COUNT(show_id)::numeric /
-        (SELECT COUNT(show_id) FROM netflix WHERE country = 'India')::numeric * 100, 2
-    ) AS avg_release
-FROM netflix
-WHERE country = 'India'
-GROUP BY country, release_year
-ORDER BY avg_release DESC
-LIMIT 5;
+ EXTRACT(YEAR FROM TO_DATE(date_added, 'Month DD, YYYY')) as YEAR,
+ COUNT(*),
+ RANK() OVER(ORDER BY COUNT(*) DESC)
+FROM NETFLIX
+where country = 'India'
+group by 1
+)t1
+where rank < 5
 ```
 
 **Objective:** Calculate and rank years by the average number of content releases by India.
@@ -195,9 +189,8 @@ LIMIT 5;
 ### 11. List All Movies that are Documentaries
 
 ```sql
-SELECT * 
-FROM netflix
-WHERE listed_in LIKE '%Documentaries';
+SELECT * FROM netflix
+WHERE listed_in LIKE '%Documentaries'
 ```
 
 **Objective:** List content that does not have a director.
@@ -205,10 +198,8 @@ WHERE listed_in LIKE '%Documentaries';
 ### 12. Find How Many Movies Actor 'Salman Khan' Appeared in the Last 10 Years
 
 ```sql
-SELECT * 
-FROM netflix
-WHERE casts LIKE '%Salman Khan%'
-  AND release_year > EXTRACT(YEAR FROM CURRENT_DATE) - 10;
+SELECT * FROM NETFLIX
+WHERE CASTS LIKE '%Salman Khan%' AND release_year > EXTRACT(YEAR FROM current_date) - 10
 ```
 
 **Objective:** Count the number of movies featuring 'Salman Khan' in the last 10 years.
@@ -216,14 +207,12 @@ WHERE casts LIKE '%Salman Khan%'
 ### 13. Find the Top 10 Actors Who Have Appeared in the Highest Number of Movies Produced in India
 
 ```sql
-SELECT 
-    UNNEST(STRING_TO_ARRAY(casts, ',')) AS actor,
-    COUNT(*)
-FROM netflix
+SELECT * FROM(
+SELECT unnest(STRING_TO_ARRAY(casts,',')) as actors, count(*) as total_count, RANK() OVER(ORDER BY COUNT(*) DESC) AS RANKS FROM NETFLIX
 WHERE country = 'India'
-GROUP BY actor
-ORDER BY COUNT(*) DESC
-LIMIT 10;
+group by 1
+)
+WHERE RANKS <= 10
 ```
 
 **Objective:** Identify the top 10 actors with the most appearances in Indian-produced movies.
