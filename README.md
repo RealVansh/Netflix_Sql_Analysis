@@ -3,14 +3,15 @@
 ![](https://github.com/najirh/netflix_sql_project/blob/main/logo.png)
 
 ## Overview
-This project involves a comprehensive analysis of Netflix's movies and TV shows data using SQL. The goal is to extract valuable insights and answer various business questions based on the dataset. The following README provides a detailed account of the project's objectives, business problems, solutions, findings, and conclusions.
+This project dives into Netflix’s movie and TV show catalog using SQL to uncover trends, patterns, and insights. The goal is to answer real business questions and turn raw data into meaningful conclusions. This README outlines the project’s objectives, problems tackled, key takeaways, and final thoughts.
 
 ## Objectives
 
-- Analyze the distribution of content types (movies vs TV shows).
-- Identify the most common ratings for movies and TV shows.
-- List and analyze content based on release years, countries, and durations.
-- Explore and categorize content based on specific criteria and keywords.
+- Compare the volume of Movies vs TV Shows available on Netflix.
+- Find the most frequently assigned ratings for both Movies and TV Shows.
+- Examine content trends across different years, countries, and durations.
+- Filter and categorize content using specific keywords, genres, directors, and actors to extract actionable insights.
+
 
 ## Dataset
 
@@ -199,19 +200,9 @@ FROM netflix
 WHERE listed_in LIKE '%Documentaries';
 ```
 
-**Objective:** Retrieve all movies classified as documentaries.
-
-### 12. Find All Content Without a Director
-
-```sql
-SELECT * 
-FROM netflix
-WHERE director IS NULL;
-```
-
 **Objective:** List content that does not have a director.
 
-### 13. Find How Many Movies Actor 'Salman Khan' Appeared in the Last 10 Years
+### 12. Find How Many Movies Actor 'Salman Khan' Appeared in the Last 10 Years
 
 ```sql
 SELECT * 
@@ -222,7 +213,7 @@ WHERE casts LIKE '%Salman Khan%'
 
 **Objective:** Count the number of movies featuring 'Salman Khan' in the last 10 years.
 
-### 14. Find the Top 10 Actors Who Have Appeared in the Highest Number of Movies Produced in India
+### 13. Find the Top 10 Actors Who Have Appeared in the Highest Number of Movies Produced in India
 
 ```sql
 SELECT 
@@ -237,7 +228,7 @@ LIMIT 10;
 
 **Objective:** Identify the top 10 actors with the most appearances in Indian-produced movies.
 
-### 15. Categorize Content Based on the Presence of 'Kill' and 'Violence' Keywords
+### 14. Categorize Content Based on the Presence of 'Kill' and 'Violence' Keywords
 
 ```sql
 SELECT 
@@ -264,20 +255,3 @@ GROUP BY category;
 - **Content Categorization:** Categorizing content based on specific keywords helps in understanding the nature of content available on Netflix.
 
 This analysis provides a comprehensive view of Netflix's content and can help inform content strategy and decision-making.
-
-
-
-## Author - Zero Analyst
-
-This project is part of my portfolio, showcasing the SQL skills essential for data analyst roles. If you have any questions, feedback, or would like to collaborate, feel free to get in touch!
-
-### Stay Updated and Join the Community
-
-For more content on SQL, data analysis, and other data-related topics, make sure to follow me on social media and join our community:
-
-- **YouTube**: [Subscribe to my channel for tutorials and insights](https://www.youtube.com/@zero_analyst)
-- **Instagram**: [Follow me for daily tips and updates](https://www.instagram.com/zero_analyst/)
-- **LinkedIn**: [Connect with me professionally](https://www.linkedin.com/in/najirr)
-- **Discord**: [Join our community to learn and grow together](https://discord.gg/36h5f2Z5PK)
-
-Thank you for your support, and I look forward to connecting with you!
